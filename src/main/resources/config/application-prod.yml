@@ -4,12 +4,10 @@ server:
 spring:
     profiles:
         active: prod
-    data:
-        mongodb:
+        cassandra:
             host: localhost
-            port: 27017
-            database: jhipster
-    
+            protocolVersion: 2
+            keyspaceName: jhipster
 
     mail:
         baseUrl: http://localhost:8080

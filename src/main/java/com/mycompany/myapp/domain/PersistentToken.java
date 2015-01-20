@@ -5,10 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,14 +15,12 @@ import java.io.Serializable;
  *
  * @see com.mycompany.myapp.security.CustomPersistentRememberMeServices
  */
-@Document(collection = "T_PERSISTENT_TOKEN")
 public class PersistentToken implements Serializable {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("d MMMM yyyy");
 
     private static final int MAX_USER_AGENT_LEN = 255;
 
-    @Id
     private String series;
 
     @JsonIgnore
@@ -40,12 +34,9 @@ public class PersistentToken implements Serializable {
     @Size(min = 0, max = 39)
     private String ipAddress;
 
-    
     private String userAgent;
 
     @JsonIgnore
-    
-    @DBRef
     private User user;
 
     public String getSeries() {

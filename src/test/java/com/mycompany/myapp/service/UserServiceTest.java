@@ -1,7 +1,6 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.Application;
-import com.mycompany.myapp.config.MongoConfiguration;
 import com.mycompany.myapp.domain.PersistentToken;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.PersistentTokenRepository;
@@ -31,7 +30,6 @@ import static org.assertj.core.api.Assertions.*;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-@Import(MongoConfiguration.class)
 public class UserServiceTest {
 
     @Inject

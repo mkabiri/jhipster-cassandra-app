@@ -2,9 +2,6 @@ package com.mycompany.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -16,10 +13,8 @@ import java.util.Set;
 /**
  * A user.
  */
-@Document(collection = "T_USER")
-public class User extends AbstractAuditingEntity implements Serializable {
+public class User implements Serializable {
 
-    @Id
     private String id;
 
     @NotNull
@@ -33,11 +28,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String password;
 
     @Size(max = 50)
-    @Field("first_name")
     private String firstName;
 
     @Size(max = 50)
-    @Field("last_name")
     private String lastName;
 
     @Email
@@ -47,11 +40,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private boolean activated = false;
 
     @Size(min = 2, max = 5)
-    @Field("lang_key")
     private String langKey;
 
     @Size(max = 20)
-    @Field("activation_key")
     private String activationKey;
 
     @JsonIgnore

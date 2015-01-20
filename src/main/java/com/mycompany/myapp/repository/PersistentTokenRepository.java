@@ -3,17 +3,34 @@ package com.mycompany.myapp.repository;
 import com.mycompany.myapp.domain.PersistentToken;
 import com.mycompany.myapp.domain.User;
 import org.joda.time.LocalDate;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
 /**
- * Spring Data MongoDB repository for the PersistentToken entity.
+ * Cassandra repository for the PersistentToken entity.
  */
-public interface PersistentTokenRepository extends MongoRepository<PersistentToken, String> {
+public class PersistentTokenRepository {
 
-    List<PersistentToken> findByUser(User user);
+    public PersistentToken findOne(String presentedSeries) {
+        return null;
+    }
 
-    List<PersistentToken> findByTokenDateBefore(LocalDate localDate);
+    public List<PersistentToken> findByUser(User user) {
+        return null;
+    }
 
+    public List<PersistentToken> findByTokenDateBefore(LocalDate localDate) {
+        return null;
+    }
+
+    public void save(PersistentToken token) {
+
+    }
+
+    public void delete(PersistentToken token) {
+
+    }
+
+    public void delete(String decodedSeries) {
+    }
 }

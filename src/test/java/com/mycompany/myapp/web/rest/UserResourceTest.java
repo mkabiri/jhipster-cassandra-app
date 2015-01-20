@@ -1,7 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.Application;
-import com.mycompany.myapp.config.MongoConfiguration;
 import com.mycompany.myapp.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-@Import(MongoConfiguration.class)
 public class UserResourceTest {
 
     @Inject
