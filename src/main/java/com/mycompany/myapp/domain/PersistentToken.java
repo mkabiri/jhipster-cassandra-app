@@ -1,5 +1,7 @@
 package com.mycompany.myapp.domain;
 
+import com.datastax.driver.mapping.annotations.PartitionKey;
+import com.datastax.driver.mapping.annotations.Table;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.LocalDate;
@@ -15,12 +17,14 @@ import java.io.Serializable;
  *
  * @see com.mycompany.myapp.security.CustomPersistentRememberMeServices
  */
+@Table(name = "persistent_token")
 public class PersistentToken implements Serializable {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("d MMMM yyyy");
 
     private static final int MAX_USER_AGENT_LEN = 255;
 
+    @PartitionKey
     private String series;
 
     @JsonIgnore

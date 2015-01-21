@@ -1,5 +1,7 @@
 package com.mycompany.myapp.domain;
 
+import com.datastax.driver.mapping.annotations.Table;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;

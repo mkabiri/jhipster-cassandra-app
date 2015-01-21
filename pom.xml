@@ -26,6 +26,7 @@
         <awaitility.version>1.4.0</awaitility.version>
         <commons-io.version>2.4</commons-io.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <datastax-driver.version>2.1.4</datastax-driver.version>
         <java.version>1.8</java.version>
         <javax.inject.version>1</javax.inject.version>
         <json-path.version>0.9.1</json-path.version>
@@ -267,6 +268,17 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-cassandra</artifactId>
+        </dependency>
+        <!-- DataStax driver -->
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-dse</artifactId>
+            <version>${datastax-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-mapping</artifactId>
+            <version>${datastax-driver.version}</version>
         </dependency>
         <!-- Spring Cloud -->
         <dependency>

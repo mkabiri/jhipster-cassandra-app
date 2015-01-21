@@ -1,5 +1,8 @@
 package com.mycompany.myapp.domain;
 
+import com.datastax.driver.mapping.annotations.Column;
+import com.datastax.driver.mapping.annotations.PartitionKey;
+import com.datastax.driver.mapping.annotations.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
@@ -13,8 +16,10 @@ import java.util.Set;
 /**
  * A user.
  */
+@Table(name = "user")
 public class User implements Serializable {
 
+    @PartitionKey
     private String id;
 
     @NotNull
@@ -40,13 +45,16 @@ public class User implements Serializable {
     private boolean activated = false;
 
     @Size(min = 2, max = 5)
+    @Column(name = "lang_key")
     private String langKey;
 
     @Size(max = 20)
+    @Column(name = "activation_key")
     private String activationKey;
 
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
+
     private Set<PersistentToken> persistentTokens = new HashSet<>();
 
     public String getId() {
