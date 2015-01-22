@@ -1,4 +1,8 @@
 
+CREATE TYPE IF NOT EXISTS authority (
+    name text
+);
+
 CREATE TABLE IF NOT EXISTS user (
     id text,
     login text,
@@ -9,7 +13,7 @@ CREATE TABLE IF NOT EXISTS user (
     activated boolean,
     lang_key text,
     activation_key text,
-    authorities set<text>,
+    authorities set<frozen <authority>>,
     PRIMARY KEY(id)
 );
 
@@ -40,11 +44,16 @@ CREATE TABLE IF NOT EXISTS activation_key_by_creation_date (
 CREATE TABLE IF NOT EXISTS persistent_token (
     series text,
     token_date timestamp,
-    authorities set<text>,
     user_agent text,
     token_value text,
     login text,
     pass text,
     ip_address text,
     PRIMARY KEY(series)
+);
+
+CREATE TABLE IF NOT EXISTS persistent_token_by_user (
+    user_id text,
+    persistent_token_series text,
+    PRIMARY KEY(user_id)
 );

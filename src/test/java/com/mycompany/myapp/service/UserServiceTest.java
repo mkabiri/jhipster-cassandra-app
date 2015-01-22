@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.Optional;
 import java.util.List;
 
@@ -64,9 +65,9 @@ public class UserServiceTest {
     private void generateUserToken(User user, String tokenSeries, LocalDate localDate) {
         PersistentToken token = new PersistentToken();
         token.setSeries(tokenSeries);
-        token.setUser(user);
+        token.setLogin(user.getLogin());
         token.setTokenValue(tokenSeries + "-data");
-        token.setTokenDate(localDate);
+        token.setTokenDate(new Date());
         token.setIpAddress("127.0.0.1");
         token.setUserAgent("Test agent");
         persistentTokenRepository.save(token);

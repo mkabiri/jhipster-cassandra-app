@@ -1,9 +1,9 @@
 package com.mycompany.myapp.domain;
 
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.Table;
+import com.datastax.driver.mapping.annotations.*;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -11,6 +11,7 @@ import org.joda.time.format.DateTimeFormatter;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Persistent tokens are used by Spring Security to automatically log in users.
@@ -32,7 +33,7 @@ public class PersistentToken implements Serializable {
     private String tokenValue;
 
     @JsonIgnore
-    private LocalDate tokenDate;
+    private Date tokenDate;
 
     //an IPV6 address max length is 39 characters
     @Size(min = 0, max = 39)
@@ -40,8 +41,7 @@ public class PersistentToken implements Serializable {
 
     private String userAgent;
 
-    @JsonIgnore
-    private User user;
+    private String login;
 
     public String getSeries() {
         return series;
@@ -59,17 +59,17 @@ public class PersistentToken implements Serializable {
         this.tokenValue = tokenValue;
     }
 
-    public LocalDate getTokenDate() {
+    public Date getTokenDate() {
         return tokenDate;
     }
 
-    public void setTokenDate(LocalDate tokenDate) {
+    public void setTokenDate(Date tokenDate) {
         this.tokenDate = tokenDate;
     }
 
     @JsonGetter
     public String getFormattedTokenDate() {
-        return DATE_TIME_FORMATTER.print(this.tokenDate);
+        return DATE_TIME_FORMATTER.print(new DateTime(this.tokenDate));
     }
 
     public String getIpAddress() {
@@ -92,12 +92,12 @@ public class PersistentToken implements Serializable {
         }
     }
 
-    public User getUser() {
-        return user;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.mycompany.myapp.domain;
 
-import com.datastax.driver.mapping.annotations.Column;
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.Table;
+import com.datastax.driver.mapping.annotations.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
@@ -53,9 +51,8 @@ public class User implements Serializable {
     private String activationKey;
 
     @JsonIgnore
+    @Frozen("set<frozen <authority>>")
     private Set<Authority> authorities = new HashSet<>();
-
-    private Set<PersistentToken> persistentTokens = new HashSet<>();
 
     public String getId() {
         return id;

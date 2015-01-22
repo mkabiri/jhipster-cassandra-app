@@ -77,7 +77,7 @@ public class UserRepository {
         findOneByEmailStmt = session.prepare(
             "SELECT id " +
             "FROM user_by_email " +
-            "WHERE login = :email");
+            "WHERE email     = :email");
 
         insertByEmailStmt = session.prepare(
             "INSERT INTO user_by_email (email, id) " +

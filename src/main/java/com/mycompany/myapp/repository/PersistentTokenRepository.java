@@ -1,6 +1,6 @@
 package com.mycompany.myapp.repository;
 
-import com.datastax.driver.core.Session;
+import com.datastax.driver.core.*;
 import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.MappingManager;
 import com.mycompany.myapp.domain.PersistentToken;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +24,16 @@ public class PersistentTokenRepository {
 
     Mapper<PersistentToken> mapper;
 
+    private PreparedStatement findPersistentTokenSeriesByUserIdStmt;
+
     @PostConstruct
     public void init() {
         mapper = new MappingManager(session).mapper(PersistentToken.class);
 
+        findPersistentTokenSeriesByUserIdStmt = session.prepare(
+            "SELECT persistent_token_series " +
+            "FROM persistent_token_by_user " +
+            "WHERE user_id = :user_id");
     }
 
     public PersistentToken findOne(String presentedSeries) {
@@ -34,10 +41,20 @@ public class PersistentTokenRepository {
     }
 
     public List<PersistentToken> findByUser(User user) {
-        return null;
+        BoundStatement stmt = findPersistentTokenSeriesByUserIdStmt.bind();
+        stmt.setString("user_id", user.getId());
+        ResultSet rs = session.execute(stmt);
+        List<PersistentToken> persistentTokens = new ArrayList<>();
+        rs.all().stream()
+            .map(row -> row.getString("persistent_token_series"))
+            .map(token -> mapper.get(token))
+            .forEach(persistentTokens::add);
+
+        return persistentTokens;
     }
 
     public List<PersistentToken> findByTokenDateBefore(LocalDate localDate) {
+        // TODO
         return null;
     }
 

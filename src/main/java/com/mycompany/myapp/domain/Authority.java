@@ -1,6 +1,8 @@
 package com.mycompany.myapp.domain;
 
+import com.datastax.driver.mapping.annotations.FrozenKey;
 import com.datastax.driver.mapping.annotations.Table;
+import com.datastax.driver.mapping.annotations.UDT;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,6 +11,7 @@ import java.io.Serializable;
 /**
  * An authority (a security role) used by Spring Security.
  */
+@UDT(name = "authority")
 public class Authority implements Serializable {
 
     @NotNull
