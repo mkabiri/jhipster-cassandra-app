@@ -30,15 +30,19 @@ public class PersistentToken implements Serializable {
 
     @JsonIgnore
     @NotNull
+    @Column(name = "token_value")
     private String tokenValue;
 
     @JsonIgnore
+    @Column(name = "token_date")
     private Date tokenDate;
 
     //an IPV6 address max length is 39 characters
     @Size(min = 0, max = 39)
+    @Column(name = "ip_address")
     private String ipAddress;
 
+    @Column(name = "user_agent")
     private String userAgent;
 
     private String login;

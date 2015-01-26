@@ -35,6 +35,8 @@ import org.springframework.data.cassandra.core.CassandraAdminTemplate;
 import org.springframework.data.cassandra.mapping.BasicCassandraMappingContext;
 import org.springframework.data.cassandra.mapping.CassandraMappingContext;
 
+import javax.inject.Inject;
+
 /**
  * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration Auto-configuration} for Spring Data's Cassandra support.
  * <p/>
@@ -51,13 +53,13 @@ import org.springframework.data.cassandra.mapping.CassandraMappingContext;
 @AutoConfigureAfter(CassandraAutoConfiguration.class)
 public class CassandraDataAutoConfiguration {
 
-    @Autowired
+    @Inject
     BeanFactory beanFactory;
 
-    @Autowired
+    @Inject
     private CassandraProperties properties;
 
-    @Autowired
+    @Inject
     private Cluster cluster;
 
     @Bean

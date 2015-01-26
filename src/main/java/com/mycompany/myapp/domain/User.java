@@ -51,8 +51,7 @@ public class User implements Serializable {
     private String activationKey;
 
     @JsonIgnore
-    @Frozen("set<frozen <authority>>")
-    private Set<Authority> authorities = new HashSet<>();
+    private Set<String> authorities = new HashSet<>();
 
     public String getId() {
         return id;
@@ -126,11 +125,11 @@ public class User implements Serializable {
         this.langKey = langKey;
     }
 
-    public Set<Authority> getAuthorities() {
+    public Set<String> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
+    public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
 

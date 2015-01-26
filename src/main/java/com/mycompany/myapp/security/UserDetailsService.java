@@ -1,6 +1,5 @@
 package com.mycompany.myapp.security;
 
-import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.UserRepository;
 import org.slf4j.Logger;
@@ -42,7 +41,7 @@ public class UserDetailsService implements org.springframework.security.core.use
                 throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
             }
             List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
-                    .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+                    .map(authority -> new SimpleGrantedAuthority(authority))
                     .collect(Collectors.toList());
             return new org.springframework.security.core.userdetails.User(lowercaseLogin,
                     user.getPassword(),

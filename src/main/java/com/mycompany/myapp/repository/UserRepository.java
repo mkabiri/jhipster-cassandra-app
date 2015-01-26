@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,15 +109,16 @@ public class UserRepository {
 
     public List<User> findAllByActivatedIsFalseAndCreatedDateBefore(DateTime dateTime) {
         // TODO
-        return null;
+        return new ArrayList<>();
     }
 
     public void save(User user) {
+        session.execute(deleteByActivationKeyStmt.bind().setString("activation_key", user.getActivationKey()));
+        session.execute(deleteByLoginStmt.bind().setString("login", user.getLogin()));
+        session.execute(deleteByEmailStmt.bind().setString("email", user.getEmail()));
+
         BatchStatement batch = new BatchStatement();
         batch.add(mapper.saveQuery(user));
-        batch.add(deleteByActivationKeyStmt.bind().setString("activation_key", user.getActivationKey()));
-        batch.add(deleteByLoginStmt.bind().setString("login", user.getLogin()));
-        batch.add(deleteByEmailStmt.bind().setString("email", user.getEmail()));
         batch.add(insertByActivationKeyStmt.bind()
             .setString("activation_key", user.getActivationKey())
             .setString("id", user.getId()));
