@@ -31,7 +31,7 @@ public class CassandraKeyspaceTest {
     private Session session;
 
     @Test
-    public void shouldHaveParcelTableCreated() throws Exception {
+    public void shouldHaveUserTableCreated() throws Exception {
         ResultSet result = session.execute("select * from user");
         assertThat(result.all()).hasSize(4);
     }
